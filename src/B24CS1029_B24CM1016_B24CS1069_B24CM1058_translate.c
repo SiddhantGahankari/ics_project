@@ -3,6 +3,7 @@
 #include "../include/vector.h"
 #include  "../include/globals.h"
 
+//to show top 5 words similar to the input word..cause more than one word might be a right transaltion
 void find_top_k(const float *source_vector, int k, int *top_indices, float *top_scores)
 {
     for (int i = 0; i < k; i++)
