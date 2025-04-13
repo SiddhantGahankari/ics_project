@@ -12,15 +12,17 @@ int main() {
     setlocale(LC_ALL, "en_US.UTF-8");
 
     printf("Which language do you want to Translate to: \n");
-    printf("For English to French \tEnter 1 \n");
-    printf("For English to Spanish \tEnter 2 \n");
+    printf("1.For English to French \tEnter french\t\t\t");
+    printf("2.For English to Spanish \tEnter spanish\n");
 
-    scanf("%d", &lang);
-
+    scanf("%s", lang);
+    for (int i = 0; i<strlen(lang); i++) {
+        lang[i] = tolower(lang[i]);
+    }
     printf("Loading English embeddings...\n");
     en_count = load_embeddings("data/wiki.en.align.vec", en_embeddings);
     printf("Loaded %d English words.\n", en_count);
-    if (lang == 1)
+    if (strcmp(lang,"french")==0)
     {
         printf("Loading French embeddings...\n");
         fr_count = load_embeddings("data/wiki.fr.align.vec", fr_embeddings);
@@ -98,7 +100,7 @@ int main() {
         }
     }
 
-    else if (lang == 2)
+    else if(strcmp(lang,"spanish") ==0)
     {
         es_count = load_embeddings("data/wiki.es.align.vec", es_embeddings);
         printf("Loaded %d Spanish words.\n", es_count);

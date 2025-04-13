@@ -83,7 +83,8 @@ char *translate_word_fr(char *english_word , int top_k,int *top_indices , float 
     {
         if (isalpha(english_word[i]))
         {
-            word_c[j++] = tolower(english_word[i]);
+            word_c[j] = tolower(english_word[i]);
+            j++;
         }
     }
 

@@ -10,5 +10,5 @@ extern int en_count;
 extern int es_count;
 extern int fr_count;
 extern int test_count;
-extern int lang;
+extern char lang[100];
 #endif
