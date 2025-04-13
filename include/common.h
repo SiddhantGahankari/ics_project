@@ -9,6 +9,7 @@
 #include <ctype.h>
 #include <time.h>
 
+
 #define EMBEDDING_DIM 300
 #define MAX_WORDS 200000
 #define MAX_WORD_LEN 100
@@ -29,7 +30,6 @@ typedef struct
     char target[MAX_WORD_LEN];
 } TranslationPair;
 
-// External declarations of global variables
 extern Embedding en_embeddings[MAX_WORDS];
 extern Embedding fr_embeddings[MAX_WORDS];
 extern TranslationPair test_pairs[MAX_TEST_PAIRS];
