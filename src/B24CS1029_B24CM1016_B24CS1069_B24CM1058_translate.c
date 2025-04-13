@@ -3,7 +3,6 @@
 #include "../include/vector.h"
 #include  "../include/globals.h"
 
-
 void find_top_k(const float *source_vector, int k, int *top_indices, float *top_scores)
 {
     for (int i = 0; i < k; i++)
@@ -30,21 +29,18 @@ void find_top_k(const float *source_vector, int k, int *top_indices, float *top_
                 break;
             }
         }
-    }
+    }   
 }
 
-
 const char* translate_word(const char* english_word, int top_k, int* top_indices, float* top_scores) {
-    static char return_buffer[MAX_WORD_LEN];  // For returning name if needed
+    static char return_buffer[MAX_WORD_LEN];
 
-    // === Step 1: Check if it's a Name (Starts with uppercase) ===
     if (isupper(english_word[0])) {
         strncpy(return_buffer, english_word, MAX_WORD_LEN - 1);
         return_buffer[MAX_WORD_LEN - 1] = '\0';
         return return_buffer;
     }
 
-    // === Step 2: Clean the word (make lowercase, strip punctuation) ===
     char cleaned[MAX_WORD_LEN] = {0};
     int j = 0;
     for (int i = 0; english_word[i] && j < MAX_WORD_LEN - 1; i++) {
@@ -54,7 +50,6 @@ const char* translate_word(const char* english_word, int top_k, int* top_indices
     }
     if (j == 0) return "<unk>";
 
-    // === Step 3: Find English embedding ===
     float* source_vector = NULL;
     for (int i = 0; i < en_count; i++) {
         if (strcmp(en_embeddings[i].word, cleaned) == 0) {
@@ -64,10 +59,8 @@ const char* translate_word(const char* english_word, int top_k, int* top_indices
     }
     if (!source_vector) return "<unk>";
 
-    // === Step 4: Find Top K most similar French words ===
     find_top_k(source_vector, top_k, top_indices, top_scores);
 
-    // === Step 5: Return best match with minimum similarity check ===
     for (int i = 0; i < top_k && top_indices[i] >= 0; i++) {
         if (strcmp(fr_embeddings[top_indices[i]].word, cleaned) != 0 &&
             top_scores[i] >= MIN_SIMILARITY) {
@@ -75,7 +68,6 @@ const char* translate_word(const char* english_word, int top_k, int* top_indices
         }
     }
 
-    // === Step 6: If fallback needed, return best available word ===
     if (top_indices[0] >= 0) {
         if (strcmp(fr_embeddings[top_indices[0]].word, cleaned) == 0) {
             return "<same>";
@@ -85,7 +77,6 @@ const char* translate_word(const char* english_word, int top_k, int* top_indices
 
     return "<unk>";
 }
-
 
 void translate_sentence(const char *input)
 {

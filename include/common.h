@@ -16,7 +16,7 @@
 #define MAX_LINE_LEN 4096
 #define MAX_TEST_PAIRS 10000
 #define TOP_K 5
-#define MIN_SIMILARITY 0.6
+#define MIN_SIMILARITY 0.4
 
 typedef struct
 {
