@@ -3,6 +3,7 @@
 #include "../include/B24CS1029_B24CM1016_B24CS1069_B24CM1058_vector.h"
 #include "../include/B24CS1029_B24CM1016_B24CS1069_B24CM1058_globals.h"
 
+// to load word embeddings from a file into the embeddings array
 int load_embeddings(char *filename, Embedding *embeddings)
 {
     FILE *file = fopen(filename, "r");
@@ -16,6 +17,7 @@ int load_embeddings(char *filename, Embedding *embeddings)
     int count = 0;
     int dim = 0;
 
+    // Read the first line to get the embedding dimension
     if (fgets(line, sizeof(line), file))
     {
         int n, d;
@@ -29,7 +31,7 @@ int load_embeddings(char *filename, Embedding *embeddings)
         }
         else
         {
-            fseek(file, 0, SEEK_SET);
+            rewind(file);
         }
     }
 
@@ -39,19 +41,23 @@ int load_embeddings(char *filename, Embedding *embeddings)
         if (!token)
             continue;
 
-        char cleaned[MAX_WORD_LEN] = {0};
+
+        // Clean and store the word
+        char word_clean[MAX_WORD_LEN] = {0};
         int j = 0;
         for (int i = 0; token[i] && j < MAX_WORD_LEN - 1; i++)
         {
             if (isalpha(token[i]))
             {
-                cleaned[j++] = tolower(token[i]);
+                word_clean[j] = tolower(token[i]);
+                j++;
             }
         }
         if (j == 0)
             continue;
 
-        strncpy(embeddings[count].word, cleaned, MAX_WORD_LEN - 1);
+        // Read the embedding vector
+        strncpy(embeddings[count].word, word_clean, MAX_WORD_LEN - 1);
         embeddings[count].word[MAX_WORD_LEN - 1] = '\0';
 
         int i = 0;
@@ -75,6 +81,8 @@ int load_embeddings(char *filename, Embedding *embeddings)
     return count;
 }
 
+
+// to load test pairs from a file into the test_pairs array
 int load_test_pairs(char *filename)
 {
     FILE *file = fopen(filename, "r");
@@ -87,9 +95,12 @@ int load_test_pairs(char *filename)
     char line[MAX_LINE_LEN];
     int count = 0;
 
+
+    // Read the file and load the source-target word pairs
     while (fgets(line, sizeof(line), file) && count < MAX_TEST_PAIRS)
     {
         char *en_word = strtok(line, "\t\n ");
+        
         char *fr_word = strtok(NULL, "\t\n ");
 
         if (en_word && fr_word)

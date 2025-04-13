@@ -19,13 +19,15 @@ int main() {
     for (int i = 0; i<strlen(lang); i++) {
         lang[i] = tolower(lang[i]);
     }
-    printf("Loading English embeddings...\n");
-    en_count = load_embeddings("data/wiki.en.align.vec", en_embeddings);
-    printf("Loaded %d English words.\n", en_count);
+
     if (strcmp(lang,"french")==0)
     {
+        printf("Loading English embeddings...\n");
+        en_count = load_embeddings("data/B24CS1029_B24CM1016_B24CS1069_B24CM1058_wiki.en.align.vec", en_embeddings);
+        printf("Loaded %d English words.\n", en_count);
+
         printf("Loading French embeddings...\n");
-        fr_count = load_embeddings("data/wiki.fr.align.vec", fr_embeddings);
+        fr_count = load_embeddings("data/B24CS1029_B24CM1016_B24CS1069_B24CM1058_wiki.fr.align.vec", fr_embeddings);
         printf("Loaded %d French words.\n", fr_count);
 
         if (en_count == 0 || fr_count == 0)
@@ -35,7 +37,7 @@ int main() {
         }
 
         printf("Loading test pairs...\n");
-        test_count = load_test_pairs("data/test_data_fr.txt");
+        test_count = load_test_pairs("data/B24CS1029_B24CM1016_B24CS1069_B24CM1058_test_data_fr.txt");
         if (test_count > 0)
         {
             printf("Loaded %d test pairs.\n", test_count);
@@ -102,7 +104,11 @@ int main() {
 
     else if(strcmp(lang,"spanish") ==0)
     {
-        es_count = load_embeddings("data/wiki.es.align.vec", es_embeddings);
+        printf("Loading English embeddings...\n");
+        en_count = load_embeddings("data/B24CS1029_B24CM1016_B24CS1069_B24CM1058_wiki.en.align.vec", en_embeddings);
+        printf("Loaded %d English words.\n", en_count);
+        
+        es_count = load_embeddings("data/B24CS1029_B24CM1016_B24CS1069_B24CM1058_wiki.es.align.vec", es_embeddings);
         printf("Loaded %d Spanish words.\n", es_count);
 
         if (en_count == 0 || es_count == 0)
@@ -112,7 +118,7 @@ int main() {
         }
 
         printf("Loading test pairs...\n");
-        test_count = load_test_pairs("data/test_data_es.txt");
+        test_count = load_test_pairs("data/B24CS1029_B24CM1016_B24CS1069_B24CM1058_test_data_es.txt");
         if (test_count > 0)
         {
             printf("Loaded %d test pairs.\n", test_count);

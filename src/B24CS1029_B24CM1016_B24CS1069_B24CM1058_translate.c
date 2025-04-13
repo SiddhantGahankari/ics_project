@@ -37,7 +37,7 @@ void find_top_k_fr(float *source_vector,int k, int *top_indices , float *top_sco
 }
 
 
-// find top-k similar Spanish words
+// find top-k similar Spanish words similarly as above
 void find_top_k_es(float *source_vector, int k, int *top_indices, float *top_scores)
 {
     for (int i = 0; i < k; i++)
@@ -126,7 +126,7 @@ char *translate_word_fr(char *english_word , int top_k,int *top_indices , float 
 }
 
 
-// Translate a single English word to Spanish
+// similar to the translate_word_fr function
 char *translate_word_es(char *english_word,int top_k ,int *top_indices, float *top_scores)
 {
     if (isupper(english_word[0]))
@@ -155,7 +155,6 @@ char *translate_word_es(char *english_word,int top_k ,int *top_indices, float *t
         }
      }
 
-    // if it is not found then return unknown
     if (!source_vector) return "<unk>";
 
     find_top_k_es(source_vector, top_k, top_indices, top_scores);
