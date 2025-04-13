@@ -14,6 +14,7 @@ void find_top_k(const float *source_vector, int k, int *top_indices, float *top_
 
     for (int i = 0; i < fr_count; i++)
     {
+        //cosine similarity to measure how close each French word is to the input
         float sim = cosine_similarity(source_vector, fr_embeddings[i].vector);
 
         for (int j = 0; j < k; j++)
@@ -43,7 +44,7 @@ const char* translate_word(const char* english_word, int top_k, int* top_indices
         return return_buffer;
     }
 
-    //clean the word, make it lowercase cause embedding have smallcased words
+    //clean the word, make it lowercase cause embedding have smallcased words, and remove anythin other than alphabets
     char cleaned[MAX_WORD_LEN] = {0};
     int j = 0;
     for (int i = 0; english_word[i] && j < MAX_WORD_LEN - 1; i++) {
@@ -51,8 +52,11 @@ const char* translate_word(const char* english_word, int top_k, int* top_indices
             cleaned[j++] = tolower(english_word[i]);
         }
     }
+
+    //if no valid character found, then return unknown
     if (j == 0) return "<unk>";
 
+    //if everythins proper then move ahead find its embedding
     float* source_vector = NULL;
     for (int i = 0; i < en_count; i++) {
         if (strcmp(en_embeddings[i].word, cleaned) == 0) {
@@ -60,10 +64,14 @@ const char* translate_word(const char* english_word, int top_k, int* top_indices
             break;
         }
     }
+
+    //if word not found return unk
     if (!source_vector) return "<unk>";
 
+    //find top 5 similar word to that
     find_top_k(source_vector, top_k, top_indices, top_scores);
 
+    // return the first sufficiently similar and non-identical french word
     for (int i = 0; i < top_k && top_indices[i] >= 0; i++) {
         if (strcmp(fr_embeddings[top_indices[i]].word, cleaned) != 0 &&
             top_scores[i] >= MIN_SIMILARITY) {
@@ -71,6 +79,7 @@ const char* translate_word(const char* english_word, int top_k, int* top_indices
         }
     }
 
+    //if not return the same
     if (top_indices[0] >= 0) {
         if (strcmp(fr_embeddings[top_indices[0]].word, cleaned) == 0) {
             return "<same>";
