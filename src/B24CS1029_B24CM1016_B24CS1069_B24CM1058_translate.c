@@ -2,6 +2,7 @@
 #include "../include/translate.h"
 #include "../include/vector.h"
 #include  "../include/globals.h"
+char buffer[MAX_WORD_LEN];
 
 //to show top 5 words similar to the input word..cause more than one word might be a right transaltion
 void find_top_k(const float *source_vector, int k, int *top_indices, float *top_scores)
@@ -35,13 +36,12 @@ void find_top_k(const float *source_vector, int k, int *top_indices, float *top_
 }
 
 const char* translate_word(const char* english_word, int top_k, int* top_indices, float* top_scores) {
-    static char return_buffer[MAX_WORD_LEN];
 
     // If the word is capitalized ie probably a name or something so just return it and dont find anything similar to it
     if (isupper(english_word[0])) {
-        strncpy(return_buffer, english_word, MAX_WORD_LEN - 1);
-        return_buffer[MAX_WORD_LEN - 1] = '\0';
-        return return_buffer;
+        strncpy(buffer, english_word, MAX_WORD_LEN - 1);
+        buffer[MAX_WORD_LEN - 1] = '\0';
+        return buffer;
     }
 
     //clean the word, make it lowercase cause embedding have smallcased words, and remove anythin other than alphabets
