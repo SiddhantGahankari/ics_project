@@ -33,47 +33,50 @@ void find_top_k(const float *source_vector, int k, int *top_indices, float *top_
 }
 
 
-const char *translate_word(const char *english_word, int top_k, int *top_indices, float *top_scores)
-{
+const char* translate_word(const char* english_word, int top_k, int* top_indices, float* top_scores) {
+    static char return_buffer[MAX_WORD_LEN];  // For returning name if needed
+
+    // === Step 1: Check if it's a Name (Starts with uppercase) ===
+    if (isupper(english_word[0])) {
+        strncpy(return_buffer, english_word, MAX_WORD_LEN - 1);
+        return_buffer[MAX_WORD_LEN - 1] = '\0';
+        return return_buffer;
+    }
+
+    // === Step 2: Clean the word (make lowercase, strip punctuation) ===
     char cleaned[MAX_WORD_LEN] = {0};
     int j = 0;
-    for (int i = 0; english_word[i] && j < MAX_WORD_LEN - 1; i++)
-    {
-        if (isalpha(english_word[i]))
-        {
+    for (int i = 0; english_word[i] && j < MAX_WORD_LEN - 1; i++) {
+        if (isalpha(english_word[i])) {
             cleaned[j++] = tolower(english_word[i]);
         }
     }
-    if (j == 0)
-        return "<unk>";
+    if (j == 0) return "<unk>";
 
-    float *source_vector = NULL;
-    for (int i = 0; i < en_count; i++)
-    {
-        if (strcmp(en_embeddings[i].word, cleaned) == 0)
-        {
+    // === Step 3: Find English embedding ===
+    float* source_vector = NULL;
+    for (int i = 0; i < en_count; i++) {
+        if (strcmp(en_embeddings[i].word, cleaned) == 0) {
             source_vector = en_embeddings[i].vector;
             break;
         }
     }
-    if (!source_vector)
-        return "<unk>";
+    if (!source_vector) return "<unk>";
 
+    // === Step 4: Find Top K most similar French words ===
     find_top_k(source_vector, top_k, top_indices, top_scores);
 
-    for (int i = 0; i < top_k && top_indices[i] >= 0; i++)
-    {
+    // === Step 5: Return best match with minimum similarity check ===
+    for (int i = 0; i < top_k && top_indices[i] >= 0; i++) {
         if (strcmp(fr_embeddings[top_indices[i]].word, cleaned) != 0 &&
-            top_scores[i] >= MIN_SIMILARITY)
-        {
+            top_scores[i] >= MIN_SIMILARITY) {
             return fr_embeddings[top_indices[i]].word;
         }
     }
 
-    if (top_indices[0] >= 0)
-    {
-        if (strcmp(fr_embeddings[top_indices[0]].word, cleaned) == 0)
-        {
+    // === Step 6: If fallback needed, return best available word ===
+    if (top_indices[0] >= 0) {
+        if (strcmp(fr_embeddings[top_indices[0]].word, cleaned) == 0) {
             return "<same>";
         }
         return fr_embeddings[top_indices[0]].word;
