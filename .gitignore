@@ -50,7 +50,7 @@ coverage.xml
 .hypothesis/
 .pytest_cache/
 cover/
-.vscode/
+
 # Translations
 *.mo
 *.pot
@@ -60,7 +60,7 @@ data/
 local_settings.py
 db.sqlite3
 db.sqlite3-journal
-
+.vscode/
 # Flask stuff:
 instance/
 .webassets-cache
@@ -172,3 +172,4 @@ cython_debug/
 
 # PyPI configuration file
 .pypirc
+.vscode/
