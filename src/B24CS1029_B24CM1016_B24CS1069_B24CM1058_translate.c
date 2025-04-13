@@ -36,12 +36,14 @@ void find_top_k(const float *source_vector, int k, int *top_indices, float *top_
 const char* translate_word(const char* english_word, int top_k, int* top_indices, float* top_scores) {
     static char return_buffer[MAX_WORD_LEN];
 
+    // If the word is capitalized ie probably a name or something so just return it and dont find anything similar to it
     if (isupper(english_word[0])) {
         strncpy(return_buffer, english_word, MAX_WORD_LEN - 1);
         return_buffer[MAX_WORD_LEN - 1] = '\0';
         return return_buffer;
     }
 
+    //clean the word, make it lowercase cause embedding have smallcased words
     char cleaned[MAX_WORD_LEN] = {0};
     int j = 0;
     for (int i = 0; english_word[i] && j < MAX_WORD_LEN - 1; i++) {
@@ -76,6 +78,7 @@ const char* translate_word(const char* english_word, int top_k, int* top_indices
         return fr_embeddings[top_indices[0]].word;
     }
 
+    //no match, so return unknown
     return "<unk>";
 }
 
@@ -85,23 +88,28 @@ void translate_sentence(const char *input)
     strncpy(sentence_copy, input, MAX_LINE_LEN - 1);
     sentence_copy[MAX_LINE_LEN - 1] = '\0';
 
+    //tokenize the sentence, separate it into words so that we can load embeddings for each
     char *token = strtok(sentence_copy, " \t\n\r");
     int top_indices[TOP_K];
     float top_scores[TOP_K];
 
     printf("Translation: ");
+    
+    //go word by word...
     while (token)
     {
         const char *translation = translate_word(token, TOP_K, top_indices, top_scores);
         if (strcmp(translation, "<unk>") == 0 || strcmp(translation, "<same>") == 0)
         {
+            //word is unknown or same as english word so we return as it is
             printf("%s ", token);
         }
         else
         {
+            //if not so, return its correspoding translatioin
             printf("%s ", translation);
         }
-        token = strtok(NULL, " \t\n\r");
+        token = strtok(NULL, " \t\n\r"); //move to next, one done
     }
     printf("\n");
 }
