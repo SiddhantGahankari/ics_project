@@ -1,7 +1,8 @@
 #include "../include/common.h"
 #include "../include/io.h"
 #include "../include/vector.h"
-#include "../include/globals.h"
+#include  "../include/globals.h"
+
 
 
 int load_embeddings(const char *filename, Embedding *embeddings)

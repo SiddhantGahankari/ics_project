@@ -1,7 +1,8 @@
 #include "../include/common.h"
 #include "../include/translate.h"
 #include "../include/vector.h"
-#include "../include/globals.h"
+#include  "../include/globals.h"
+
 
 void find_top_k(const float *source_vector, int k, int *top_indices, float *top_scores)
 {

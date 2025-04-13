@@ -1,7 +1,8 @@
 #include "../include/common.h"
 #include "../include/translate.h"
 #include "../include/eval.h"
-#include "../include/globals.h"
+#include  "../include/globals.h"
+
 
 void evaluate_accuracy()
 {

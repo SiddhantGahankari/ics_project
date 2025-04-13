@@ -1,6 +1,8 @@
 #include "../include/common.h"
 #include "../include/vector.h"
-#include "../include/globals.h"
+#include  "../include/globals.h"
+
+
 
 
 float cosine_similarity(const float *a, const float *b)

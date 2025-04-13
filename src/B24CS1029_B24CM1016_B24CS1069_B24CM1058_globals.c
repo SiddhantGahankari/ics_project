@@ -1,4 +1,5 @@
-#include "../include/globals.h" 
+#include "../include/common.h"
+#include  "../include/globals.h"
 
 Embedding en_embeddings[MAX_WORDS];
 Embedding fr_embeddings[MAX_WORDS];
