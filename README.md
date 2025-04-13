@@ -4,7 +4,8 @@ This project implements a simple natural language translation system using pre-t
 
 ## 📁 Project Structure
 
-ics_project/# Header files 
+ics_project/
+## Header files 
 ├── include/ <br>
  ├── common.h  <br>
  ├── eval.h  <br>
@@ -12,14 +13,16 @@ ics_project/# Header files
  ├── io.h  <br>
  ├── translate.h<br> 
  │── vector.h <br>
-├── src/ # Source files <br>
+## Source files <br>
+├── src/
   ├── *_eval.c <br>
   ├── *_globals.c <br>
   ├── *_io.c <br>
   ├── *_main.c  <br>
   ├── *_translate.c <br>
   │── *_vector.c <br>
-├── obj/ # Object files <br>
+## Object files <br>
+├── obj/
 ├── makefile # Build instructions <br>
 ├── main # Compiled binary (after build) <br>
 ├── .gitignore <br>
