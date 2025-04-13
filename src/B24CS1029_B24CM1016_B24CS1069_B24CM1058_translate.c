@@ -1,7 +1,7 @@
-#include "../include/common.h"
-#include "../include/translate.h"
-#include "../include/vector.h"
-#include "../include/globals.h"
+#include "../include/B24CS1029_B24CM1016_B24CS1069_B24CM1058_common.h"
+#include "../include/B24CS1029_B24CM1016_B24CS1069_B24CM1058_translate.h"
+#include "../include/B24CS1029_B24CM1016_B24CS1069_B24CM1058_vector.h"
+#include "../include/B24CS1029_B24CM1016_B24CS1069_B24CM1058_globals.h"
 
 char buffer[MAX_WORD_LEN]; // buffer for whenever required in the code
 

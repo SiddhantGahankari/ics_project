@@ -1,6 +1,6 @@
 #ifndef GLOBALS_H
 #define GLOBALS_H
-#include "../include/common.h"
+#include "B24CS1029_B24CM1016_B24CS1069_B24CM1058_common.h"
 
 extern Embedding en_embeddings[MAX_WORDS];
 extern Embedding fr_embeddings[MAX_WORDS];
