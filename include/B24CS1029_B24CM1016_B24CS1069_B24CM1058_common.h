@@ -7,7 +7,6 @@
 #include <math.h>
 #include <locale.h>
 #include <ctype.h>
-#include <time.h>
 
 
 #define EMBEDDING_DIM 300
