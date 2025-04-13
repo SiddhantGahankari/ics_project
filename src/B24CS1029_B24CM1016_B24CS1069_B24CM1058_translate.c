@@ -202,7 +202,6 @@ void translate_sentence_fr(char *input)
 
             
             strcat(full_output, translation);
-        
         }
         strcat(full_output, " ");
         token = strtok(NULL, " \t\n\r");
@@ -227,8 +226,11 @@ void translate_sentence_es(char *input)
     while (token) {
         char *translation = translate_word_es(token, TOP_K, top_indices, top_scores);
         if (strcmp(translation, "<unk>") == 0 || strcmp(translation, "<same>") == 0) {
+            
             strcat(full_output, token);
         } else {
+
+            
             strcat(full_output, translation);
         }
         strcat(full_output, " ");
