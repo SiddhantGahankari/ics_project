@@ -5,8 +5,10 @@
 #include "../include/vector.h"
 #include "../include/globals.h"
 
-int main()
-{
+
+
+int main() {
+    //to enable utf8 encoding, so that french words with accents are shown 
     setlocale(LC_ALL, "en_US.UTF-8");
 
     printf("Which language do you want to Translate to: \n");
