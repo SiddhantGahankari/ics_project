@@ -5,25 +5,25 @@ This project implements a simple natural language translation system using pre-t
 ## 📁 Project Structure
 
 ics_project/# Header files 
-├── include/ 
- ├── common.h │ 
- ├── eval.h │ 
- ├── globals.h 
- ├── io.h │ 
- ├── translate.h 
- │── vector.h 
-├── src/ # Source files 
-  ├── *_eval.c 
-  ├── *_globals.c 
-  ├── *_io.c 
-  ├── *_main.c  
-  ├── *_translate.c 
-  │── *_vector.c
-├── obj/ # Object files 
-├── makefile # Build instructions 
-├── main # Compiled binary (after build) 
-├── .gitignore 
-|── LICENSE
+├── include/ <br>
+ ├── common.h  <br>
+ ├── eval.h  <br>
+ ├── globals.h <br>
+ ├── io.h  <br>
+ ├── translate.h<br> 
+ │── vector.h <br>
+├── src/ # Source files <br>
+  ├── *_eval.c <br>
+  ├── *_globals.c <br>
+  ├── *_io.c <br>
+  ├── *_main.c  <br>
+  ├── *_translate.c <br>
+  │── *_vector.c <br>
+├── obj/ # Object files <br>
+├── makefile # Build instructions <br>
+├── main # Compiled binary (after build) <br>
+├── .gitignore <br>
+|── LICENSE<br>
 
 
 
