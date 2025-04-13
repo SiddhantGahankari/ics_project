@@ -4,8 +4,8 @@
 
 
 
-
-float cosine_similarity(const float *a, const float *b)
+//cosine similarity to measure how close each output word is to the input
+float cosine_similarity(float *a, float *b)
 {
     float dot = 0.0;
     for (int i = 0; i < EMBEDDING_DIM; i++)
@@ -15,7 +15,7 @@ float cosine_similarity(const float *a, const float *b)
     return dot;
 }
 
-
+// normalize the input vector to unit length.if its below the threshold value of 1e-6 make it a unit vector.
 void normalize_vector(float *vec)
 {
     float norm = 0.0;

@@ -1,16 +1,14 @@
 #include "../include/common.h"
 #include "../include/io.h"
 #include "../include/vector.h"
-#include  "../include/globals.h"
+#include "../include/globals.h"
 
-
-
-int load_embeddings(const char *filename, Embedding *embeddings)
+int load_embeddings(char *filename, Embedding *embeddings)
 {
     FILE *file = fopen(filename, "r");
     if (!file)
     {
-        fprintf(stderr, "Error opening file: %s\n", filename);
+        printf("Error opening file: %s\n", filename);
         return 0;
     }
 
@@ -26,7 +24,7 @@ int load_embeddings(const char *filename, Embedding *embeddings)
             dim = d;
             if (dim != EMBEDDING_DIM)
             {
-                fprintf(stderr, "Warning: Embedding dimension mismatch (%d vs %d)\n", dim, EMBEDDING_DIM);
+                printf("Warning: Embedding dimension mismatch (%d vs %d)\n", dim, EMBEDDING_DIM);
             }
         }
         else
@@ -69,7 +67,7 @@ int load_embeddings(const char *filename, Embedding *embeddings)
         }
         else
         {
-            fprintf(stderr, "Warning: Invalid vector dimension for word '%s'\n", embeddings[count].word);
+            printf("Warning: Invalid vector dimension for word '%s'\n", embeddings[count].word);
         }
     }
 
@@ -77,12 +75,12 @@ int load_embeddings(const char *filename, Embedding *embeddings)
     return count;
 }
 
-int load_test_pairs(const char *filename)
+int load_test_pairs(char *filename)
 {
     FILE *file = fopen(filename, "r");
     if (!file)
     {
-        fprintf(stderr, "Error opening test file: %s\n", filename);
+        printf("Error opening test file: %s\n", filename);
         return 0;
     }
 
