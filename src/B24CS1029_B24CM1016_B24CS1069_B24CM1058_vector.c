@@ -18,7 +18,7 @@ float cosine_similarity(float *a, float *b)
 // normalize the input vector to unit length.if its below the threshold value of 1e-6 make it a unit vector.
 void normalize_vector(float *vec)
 {
-    float norm = 0.0;
+    float norm = 0.0;   
     for (int i = 0; i < EMBEDDING_DIM; i++)
     {
         norm += vec[i] * vec[i];
