@@ -22,7 +22,7 @@ ics_project/
   ├── *_translate.c <br>
   │── *_vector.c <br>
 ## Object files <br>
-├── obj/
+├── obj/ <br>
 ├── makefile # Build instructions <br>
 ├── main # Compiled binary (after build) <br>
 ├── .gitignore <br>
@@ -32,7 +32,7 @@ ics_project/
 
 If Data is not donwloaded Downlaod it from [here](https://drive.google.com/drive/folders/10quuOX3qur2va1fgnwWUcDwbaIW7i719?usp=drive_link)
 
-Add it to the /data folder 
+Unzip & Add it to the /data folder 
 
 Build the project using:
 
