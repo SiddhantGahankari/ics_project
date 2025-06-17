@@ -1,7 +1,7 @@
-#include "../include/B24CS1029_B24CM1016_B24CS1069_B24CM1058_common.h"
-#include "../include/B24CS1029_B24CM1016_B24CS1069_B24CM1058_translate.h"
-#include "../include/B24CS1029_B24CM1016_B24CS1069_B24CM1058_eval.h"
-#include "../include/B24CS1029_B24CM1016_B24CS1069_B24CM1058_globals.h"
+#include "../include/common.h"
+#include "../include/translate.h"
+#include "../include/eval.h"
+#include "../include/globals.h"
 
 // this function evaluates the accuracy for French translations
 void evaluate_accuracy_fr() {
