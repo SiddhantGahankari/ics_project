@@ -1,7 +1,7 @@
-#include "../include/B24CS1029_B24CM1016_B24CS1069_B24CM1058_common.h"
-#include "../include/B24CS1029_B24CM1016_B24CS1069_B24CM1058_io.h"
-#include "../include/B24CS1029_B24CM1016_B24CS1069_B24CM1058_vector.h"
-#include "../include/B24CS1029_B24CM1016_B24CS1069_B24CM1058_globals.h"
+#include "../include/common.h"
+#include "../include/io.h"
+#include "../include/vector.h"
+#include "../include/globals.h"
 
 // to load word embeddings from a file into the embeddings array
 int load_embeddings(char *filename, Embedding *embeddings)
